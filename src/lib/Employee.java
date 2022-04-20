@@ -14,7 +14,12 @@ public class Employee {
 	private String address;
 	
 	private boolean gender; //true = Laki-laki, false = Perempuan
+<<<<<<< Updated upstream
 	
+=======
+
+
+>>>>>>> Stashed changes
 
 	
 	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
