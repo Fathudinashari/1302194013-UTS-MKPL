@@ -1,4 +1,8 @@
 package lib;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TaxFunction {
 
@@ -13,7 +17,65 @@ public class TaxFunction {
 	 * Jika pegawai sudah memiliki anak maka penghasilan tidak kena pajaknya ditambah sebesar Rp 4.500.000 per anak sampai anak ketiga.
 	 * 
 	 */
+
+	private String employeeId;
+	private String idNumber;
 	
+	private int yearJoined;
+	private int monthJoined;
+	private int dayJoined;
+	private int monthWorkingInYear;
+	
+	private int monthlySalary;
+	private int otherMonthlyIncome;
+	private int annualDeductible;
+	
+	private String spouseName;
+	private String spouseIdNumber;
+
+	private List<String> childNames;
+	private List<String> childIdNumbers;
+
+
+	public void Employee(String employeeId, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined) {
+		this.employeeId = employeeId;
+		this.idNumber = idNumber;
+		this.yearJoined = yearJoined;
+		this.monthJoined = monthJoined;
+		this.dayJoined = dayJoined;
+	}
+
+	public void setAnnualDeductible(int deductible) {	
+		this.annualDeductible = deductible;
+	}
+	
+	public void setAdditionalIncome(int income) {	
+		this.otherMonthlyIncome = income;
+	}
+	
+	public void setSpouse(String spouseName, String spouseIdNumber) {
+		this.spouseName = spouseName;
+		this.spouseIdNumber = idNumber;
+	}
+	
+	public void addChild(String childName, String childIdNumber) {
+		childNames.add(childName);
+		childIdNumbers.add(childIdNumber);
+	}
+	
+	public int getAnnualIncomeTax() {
+		
+		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+		LocalDate date = LocalDate.now();
+		
+		if (date.getYear() == yearJoined) {
+			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		}else {
+			monthWorkingInYear = 12;
+		}
+		
+		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+	}
 	
 	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
 		
