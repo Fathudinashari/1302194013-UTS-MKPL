@@ -13,18 +13,14 @@ public class Employee {
 	private String idNumber;
 	private String address;
 	
-	private boolean gender; //true = Laki-laki, false = Perempuan
+	public enum gender{male, female};
 
-
-
-	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, boolean gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
-		this.gender = gender;
 
 	}
 	
